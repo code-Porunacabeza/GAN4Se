@@ -26,6 +26,8 @@ class AverageMeter(object):
 
 def train_epoch(net_S,net_D, opt_S,opt_D, loss_S, dataloader, epoch, n_epochs, Iters):
     loss_S_log = AverageMeter()
+    loss_G_log=AverageMeter()
+    loss_D_log=AverageMeter()
     for i in range(Iters):
         input, target = next(dataloader.__iter__())
         if torch.cuda.is_available():
@@ -38,10 +40,10 @@ def train_epoch(net_S,net_D, opt_S,opt_D, loss_S, dataloader, epoch, n_epochs, I
         seg_masked=input.clone()
         input_mask=input.clone()
         seg_masked=input_mask*seg
-        seg_masked=seg_masked.cuda()
+
         result=net_D(seg_masked)
         target_masked=input_mask*target
-        target_masked=target_masked.cuda()
+
         target_D=net_D(target_masked)
         loss_D=torch.mean(torch.abs(result-target_D))
         loss_D.backward()
@@ -52,10 +54,10 @@ def train_epoch(net_S,net_D, opt_S,opt_D, loss_S, dataloader, epoch, n_epochs, I
         net_S.zero_grad()
         seg=net_S(input)
         seg_masked=input_mask*seg
-        seg_masked=seg_masked.cuda()
+
         result=net_D(seg_masked)
         target_masked=input_mask*target
-        target_masked=target_masked.cuda()
+
         target_S=net_D(target_masked)
 
         errS = loss_S(seg, target)
@@ -65,14 +67,22 @@ def train_epoch(net_S,net_D, opt_S,opt_D, loss_S, dataloader, epoch, n_epochs, I
         opt_S.step()
         opt_S.zero_grad()
         loss_S_log.update(errS.data, target.size(0))
+        loss_G_log.update(loss_G.data,target.size(0))
+        loss_D_log.update(loss_D.data,target.size(0))
 
         res = '\t'.join(['Epoch: [%d/%d]' % (epoch + 1, n_epochs),
                          'Iter: [%d/%d]' % (i + 1, Iters),
                          'DiceLoss_S %f' % (loss_S_log.avg)])
 
         print(res)
-        print("Epoch[{}]({}/{}): G_Loss: {:.4f}".format(epoch+1, i+1), loss_G.data[0])
-        print("Epoch[{}]({}/{}): D_Loss: {:.4f}".format(epoch+1, i+1), loss_D.data[0])
+
+        print('Epoch: [%d/%d]' % (epoch + 1, n_epochs),
+                         'Iter: [%d/%d]' % (i + 1, Iters),
+                         'G_Loss %f' % (loss_G_log.avg))
+        print('Epoch: [%d/%d]' % (epoch + 1, n_epochs),
+              'Iter: [%d/%d]' % (i + 1, Iters),
+              'D_Loss %f' % (loss_D_log.avg))
+
 
     return
 
@@ -146,15 +156,15 @@ def is_image3d_file(filename):
     return any(filename.endswith(extension) for extension in [".nii.gz"])
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "3"
-    n_epochs = 0
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    n_epochs = 200
     batch_size = 1
     lr = 1e-4
     Iters = 200
     n_classes = 5
     crop_shape = (128, 128, 128)
-    model_name = "DenseBiasNet"
-    train_dir = 'data/train'
+    model_name = "GANDenseBiasNet"
+    train_dir = '/root/autodl-tmp/kipa/train'
     pred_dir = 'results'
     checkpoint_dir = 'weights'
     test_dir = 'data/open'

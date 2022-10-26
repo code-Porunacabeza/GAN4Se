@@ -323,7 +323,7 @@ class NetD(nn.Module):
         self.convblock6=conv_block(ndf*8,ndf*8,3,2,1)
     def forward(self,x):
         batchsize = x.size()[0]
-        out1 = self.convblock1(input)
+        out1 = self.convblock1(x)
         # out1 = self.convblock1_1(out1)
         out2 = self.convblock2(out1)
         # out2 = self.convblock2_1(out2)
@@ -335,7 +335,7 @@ class NetD(nn.Module):
         # out5 = self.convblock5_1(out5)
         out6 = self.convblock6(out5)
         # out6 = self.convblock6_1(out6) + out6
-        output = torch.cat((input.view(batchsize, -1), 1 * out1.view(batchsize, -1),
+        output = cat((x.view(batchsize, -1), 1 * out1.view(batchsize, -1),
                             2 * out2.view(batchsize, -1), 2 * out3.view(batchsize, -1),
                             2 * out4.view(batchsize, -1), 2 * out5.view(batchsize, -1),
                             4 * out6.view(batchsize, -1)), 1)
