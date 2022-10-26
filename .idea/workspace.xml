@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c673d232-e37d-4867-921b-a7bf224753f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/GAN2Se.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GAN2Se.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c673d232-e37d-4867-921b-a7bf224753f9" name="Default Changelist" comment="second commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GAN4seg.py" beforeDir="false" afterPath="$PROJECT_DIR$/GAN4seg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/net.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/net.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,18 +84,34 @@
       <workItem from="1666075974324" duration="5133000" />
       <workItem from="1666161648873" duration="2034000" />
       <workItem from="1666689950765" duration="661000" />
-      <workItem from="1666748003443" duration="323000" />
+      <workItem from="1666748003443" duration="875000" />
     </task>
+    <task id="LOCAL-00001" summary="second commit">
+      <created>1666748353156</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666748353156</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="second commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
   </component>
   <component name="WindowStateProjectService">
     <state x="514" y="247" key="#Deployment" timestamp="1666079896289">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="514" y="247" key="#Deployment/0.0.1920.1040@0.0.1920.1040" timestamp="1666079896289" />
+    <state x="547" y="113" key="CommitChangelistDialog2" timestamp="1666748376882">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="547" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1666748376882" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1666162248452">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -117,11 +117,16 @@ def train_net(n_epochs=200,
 
         loss_S = mix_loss()
 
+        S_name=model_name+'_S'
+        D_name=model_name+'_D'
+
         for epoch in range(n_epochs):
             train_epoch(net_S,net_D, opt_S,opt_D, loss_S, dataloader, epoch, n_epochs, Iters)
-            if epoch % 20 == 0:
-                torch.save(net_S.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, model_name, epoch))
-        torch.save(net_S.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, model_name, n_epochs))
+            if epoch % 10 == 0:
+                torch.save(net_S.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, S_name, epoch))
+                torch.save(net_D.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, net_D, epoch))
+        torch.save(net_S.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, S_name, epoch))
+        torch.save(net_D.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, net_D, epoch))
     return net_S
 
 def predict(model, save_path, img_path, model_name):
