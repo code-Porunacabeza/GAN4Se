@@ -6,7 +6,8 @@ from torch.utils.data import DataLoader
 import torch
 import SimpleITK as sitk
 from evaluation.evaluation import DSC, HDAVD
-from models.net import DenseBiasNet,NetD
+from models.net import NetD
+from models.DenseBiasNet_with_inception import DenseBiasNet
 from utils.dataloader import DatasetFromFolder3D
 from utils.loss import mix_loss
 
@@ -124,9 +125,9 @@ def train_net(n_epochs=200,
             train_epoch(net_S,net_D, opt_S,opt_D, loss_S, dataloader, epoch, n_epochs, Iters)
             if epoch % 10 == 0:
                 torch.save(net_S.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, S_name, epoch))
-                torch.save(net_D.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, net_D, epoch))
+                torch.save(net_D.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, D_name, epoch))
         torch.save(net_S.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, S_name, epoch))
-        torch.save(net_D.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, net_D, epoch))
+        torch.save(net_D.state_dict(), '{0}/{1}_epoch_{2}.pth'.format(checkpoint_dir, D_name, epoch))
     return net_S
 
 def predict(model, save_path, img_path, model_name):
@@ -169,7 +170,7 @@ if __name__ == '__main__':
     n_classes = 5
     crop_shape = (128, 128, 128)
     model_name = "GANDenseBiasNet"
-    train_dir = '/root/autodl-tmp/kipa/train'
+    train_dir = '/root/autodl-tmp/kipa_train/train'
     pred_dir = 'results'
     checkpoint_dir = 'weights'
     test_dir = 'data/open'
